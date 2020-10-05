@@ -1,0 +1,29 @@
+form {
+  margin-bottom: 20px;
+}
+input {
+  margin: 15px;
+}
+header {
+  background-color: rgb(21, 101, 177);
+  text-align: center;
+  height: 75px;
+  width: flex;
+
+  box-sizing: content-box;
+}
+
+#header {
+  text-align: center;
+  padding: 18px;
+  font-size: 25px;
+  font-weight: bold;
+}
+#city-name {
+  font-weight: bold;
+}
+
+.search-header {
+  color: white;
+  font-size: 25px;
+}
