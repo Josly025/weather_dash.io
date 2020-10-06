@@ -23,7 +23,7 @@
     <!--Start Container-->
     <div class="container">
         <div class="row">
-            <div class="col-4 bg-dark">
+            <div class="col-12 bg-dark">
                 <p class="search-header my-1">Search for a city</p>
                 <div class="input-group mb-4">
                     <input id="city-input" type="text" class="form-control" placeholder="Enter city name" aria-label="Enter city name">
@@ -32,7 +32,7 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                    <button id="searchHistory">Search History</button>
+                    <button id="clearHistory">Clear History</button>
                 </div>
           
             </div>
@@ -40,7 +40,7 @@
                 <div class="row mr-0">
                     <div class="col-12 border border-dark m-3 rounded">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-4">
                                 <span id="city-name" class="city-name align-middle"></span>
                             </div>
                         </div>
@@ -65,8 +65,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 d-flex">
-                                <p id="UV-index"></p>
+                            <div id="index-div" class="col-12 d-flex">
+                                <p  id="UV-index"></p>
                             </div>
                         </div>
                     </div>
@@ -78,10 +78,7 @@
                     </div>
                 </div>
                   <div id="list-example" class="rowlist-group">
-                      <a class="list-group-item list-group-item-action" href="#list-item-1">City 1</a>
-                      <a class="list-group-item list-group-item-action" href="#list-item-2">City 2</a>
-                      <a class="list-group-item list-group-item-action" href="#list-item-3">City 3</a>
-                      <a class="list-group-item list-group-item-action" href="#list-item-4">City 4</a>
+                      <p id="city-one"class="list-group-item list-group-item-action">Frequent Search:</p>
                     </div>
                 </div>
             </div>

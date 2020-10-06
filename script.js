@@ -4,28 +4,28 @@
 $(document).ready(function () {
   var queryUrl;
   var queryUV;
-  var cityValue;
   var lat;
-  var lon;
+  var long;
   var searchHistory = [];
 
   //keyup on search input tag for city
-  http: var cityInput = $("#city-input").keyup(function () {
+  var cityInput = $("#city-input").keydown(function () {
     var value = $(this).val();
     console.log(value);
-    //Setting city-input to local storage
-    cityValue = localStorage.setItem("#city-input", value);
-    searchHistory = JSON.parse(localStorage.getItem("#city-input"));
+    localStorage.setItem("city-input", value);
+    var getCity = localStorage.getItem("city-input");
+    searchHistory.push(getCity);
+    console.log(getCity);
+    console.log(searchHistory);
+    // pTag = $("#city-one").append("<p>");
+    // pTag.text(searchHistory);
     queryUrl = `http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
   });
 
   //Getting item from local storage + button to insert value into city-input
-  $("#searchHistory").click(function () {
-    $("#city-input").text(searchHistory);
-  });
 
   // City Search Buttoneventlistener
-  http: $("#search-button").click(function () {
+  $("#search-button").click(function () {
     $.ajax({
       url: queryUrl,
       method: "GET",
@@ -49,18 +49,42 @@ $(document).ready(function () {
       // WIND SPEED
       var windSpeed = "Wind: " + response.wind.speed + " mph";
       $("#wind-speed").text(windSpeed);
-      //Lat & Long
+      //Latitude
       lat = response.coord.lat;
       console.log(lat);
-      lon = response.coord.lon;
+      //Longitude
+      long = response.coord.lon;
       console.log(long);
-      var queryUV = `http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
-      //   Ajax use for UV Index
+      queryUV =
+        "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+        lat +
+        "&" +
+        "lon=" +
+        long +
+        "&appid=61db461bd021f2b15d8d849b1dfb3b9a";
+      // Ajax request (UV w/lat and long)
       $.ajax({
         url: queryUV,
         method: "GET",
-      }).then(function (task) {
-        console.log(task.data[0].value);
+      }).then(function (responseTwo) {
+        //UV index
+        var uvIndex = "UV Index: " + responseTwo.value;
+        console.log(responseTwo);
+        $("#UV-index").text(uvIndex);
+
+        var indexDiv = $("#index-div");
+        if (uvIndex >= 7) {
+          indexDiv.css("background-color", "red");
+        } else if (uvIndex >= 4) {
+          indexDiv.css("background-color", "yellow");
+        } else {
+          indexDiv.css("background-color", "green");
+        }
+      });
+
+      // button to clear history
+      $("#clearHistory").click(function () {
+        window.localStorage.clear();
       });
     });
   });
