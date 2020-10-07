@@ -6,32 +6,51 @@ $(document).ready(function () {
   var queryUV;
   var lat;
   var long;
+  var city;
   var searchHistory = [];
 
   //keyup on search input tag for city
-  var cityInput = $("#city-input").keydown(function () {
+  var cityInput = $("#city-input").keyup(function () {
     var value = $(this).val();
-    console.log(value);
-    localStorage.setItem("city-input", value);
-    var getCity = localStorage.getItem("city-input");
-    searchHistory.push(getCity);
-    console.log(getCity);
-    console.log(searchHistory);
-    // pTag = $("#city-one").append("<p>");
-    // pTag.text(searchHistory);
+    city = value;
+
     queryUrl = `http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
   });
-
+  console.log(searchHistory, "history outside");
   //Getting item from local storage + button to insert value into city-input
 
-  // City Search Buttoneventlistener
   $("#search-button").click(function () {
+    //Local storage of Cities' searched
+    var getCity = localStorage.getItem("city-input");
+    searchHistory.push(city);
+    localStorage.setItem("city-input", searchHistory);
+    console.log(getCity, "get city from input");
+    console.log(searchHistory, "last searched"); //this is our array
+    var newP = $("#city-search").append("<p>");
+    newP.text(getCity);
+
+    //loop through storage
+    for (i = 0; i < searchHistory.length; i++) {
+      var cityBtn = $("<button>" + [i] + "</button>");
+      cityBtn.append("#city-search");
+    }
+
     $.ajax({
       url: queryUrl,
       method: "GET",
     }).then(function (response) {
       console.log(response); //this is our city object with data
       console.log(response.weather);
+      // Weather ICON
+      var weatherIcon = response.weather
+        .map(function (index) {
+          return index.icon;
+        })
+        .toString();
+
+      var iconUrl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+      $("#iconUrl").attr("src", iconUrl);
+
       // CITY NAME
       var cityName = "City: " + response.name;
       $("#city-name").text(cityName);
@@ -51,10 +70,10 @@ $(document).ready(function () {
       $("#wind-speed").text(windSpeed);
       //Latitude
       lat = response.coord.lat;
-      console.log(lat);
+
       //Longitude
       long = response.coord.lon;
-      console.log(long);
+
       queryUV =
         "http://api.openweathermap.org/data/2.5/uvi?lat=" +
         lat +
