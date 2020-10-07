@@ -31,8 +31,10 @@ $(document).ready(function () {
 
     //loop through storage
     for (i = 0; i < searchHistory.length; i++) {
-      var cityBtn = $("<button>" + [i] + "</button>");
-      cityBtn.append("#city-search");
+      var cityBtn = $("<button>");
+      console.log(cityBtn);
+      cityBtn.text(searchHistory[i++]);
+      $("#list-example").html(cityBtn);
     }
 
     $.ajax({
