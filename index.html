@@ -11,82 +11,152 @@
       crossorigin="anonymous"
     />
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Saira&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"/>
     <title>Weather Dashboard</title>
   </head>
   <body>
     <!--Weather Header-->
-    <header>
+    <header class="bg-primary">
       <div class="display-3" id="header">Weather Dashboard</div>
     </header>
     <!--Start Container-->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12 bg-dark">
-                <p class="search-header my-1">Search for a city</p>
+                <p class="search-header my-1 text-light">| Search for City |</p>
                 <div class="input-group mb-4">
                     <input id="city-input" type="text" class="form-control" placeholder="Enter city name" aria-label="Enter city name">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="search-button">
+                        <button class="btn btn-primary " type="button" id="search-button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                    <button id="clearHistory">Clear History</button>
+                    <button type="button" class="btn btn-outline-primary" id="clear-hist">Clear History</button>
                 </div>
           
             </div>
-            <div class="col-8">
-                <div class="row mr-0">
-                    <div class="col-12 border border-dark m-3 rounded">
-                        <div class="row">
-                            <div class="col-4">
-                                <span id="city-name" class="city-name align-middle"></span>
-                                <img id="iconUrl" scr=" " alt="weather icon" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="current-date"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="temperature"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="humidity"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <p id="wind-speed"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div id="index-div" class="col-12 d-flex">
-                                <p  id="UV-index"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 5 Day Forecast-->
-                <div class="row"> 
-                    <div class="col-12">
-                        <h2>Last Searched: </h2>
-                    </div>
-                </div>
-                  <div id="list-example" class="rowlist-group">
-                      <p id="city-searched"class="list-group-item list-group-item-action"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
+
+            <div class="container-fluid m-3">
+                 <div class="row">
+                    <div class="col-6 border border-dark m-3 rounded bg-dark text-light font-weight-bold">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <span id="city-name" class="city-name align-middle"></span>
+                                                <img id="iconUrl" scr=" " alt="weather icon" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p id="current-date"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p id="temperature"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p id="humidity"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p id="wind-speed"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div id="index-div" class="col-12 d-flex">
+                                                <p  id="UV-index"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 list-group ">
+                                    <p href="#" class="list-group-item list-group-item-action disabled bg-dark text-primary ">
+                                        | Search History |
+                                    </p>
+                                    <ul class="list-group" id="searchHistory">
+                            
+                                    </ul>
+                                   
+                                    
+                                    </div>
+                                </div>  
+                            </div>             
+                        </div>
+                    </div>
+                    <hr>
+    <!-- 5 Day Forecast-->
+                <div class = "container-fluid">
+                    <h2><u>Five-Day Forecast</u></h2>
+                    <div class="row"> 
+                        <!--Day 1-->
+                         <div class="col-sm-2 mr-3 ">
+                        <div class="card border border-primary day-5 " style="width: 8rem;">
+                            <h5 class="day-1" id="date1">Date: </h5>
+                            <p></p>
+                            <span><img class="day-5" id="img1" src="" alt=""></span>
+                            <p></p>
+                            <h6 class="day1" id="temp1"> Temp:</h6>
+                            <p></p>
+                            <h6 class="day1" id="humid1"> Humidity:</h6>
+                        </div>
+                    </div>
+                    <!--Day 2-->
+                      <div class="col-sm-2 mr-3">
+                        <div class="card day-2 border-primary " style="width: 8rem;">
+                            <h5 class="day-2" id="date2">Date: </h5>
+                            <p></p>
+                            <span><img class="day-2" id="img2" src="" alt=""></span>
+                            <p></p>
+                            <h6 class="day2" id="temp2"> Temp:</h6>
+                            <p></p>
+                            <h6 class="day2" id="humid2"> Humidity:</h6>
+                        </div>
+                    </div>
+                    <!--Day 3-->
+                      <div class="col-sm-2 mr-3">
+                        <div class="card day-3 border-primary " style="width: 8rem;">
+                            <h5 class="day-3" id="date3">Date: </h5>
+                            <p></p>
+                            <span><img class="day-3" id="img3" src="" alt=""></span>
+                            <p></p>
+                            <h6 class="day3" id="temp3"> Temp:</h6>
+                            <p></p>
+                            <h6 class="day3" id="humid3"> Humidity:</h6>
+                        </div>
+                    </div>
+                    <!--Day 4-->
+                      <div class="col-sm-2 mr-3">
+                        <div class="card day-4 border-primary " style="width: 8rem;">
+                            <h5 class="day-4" id="date4">Date: </h5>
+                            <p></p>
+                            <span><img class="day-4" id="img4" src="" alt=""></span>
+                            <p></p>
+                            <h6 class="day4" id="temp4"> Temp:</h6>
+                            <p></p>
+                            <h6 class="day4" id="humid4"> Humidity:</h6>
+                        </div>
+                    </div>
+                    <!--Day 5-->
+                      <div class="col-sm-2 mr-3">
+                        <div class="card day-5 border-primary" style="width: 8rem;">
+                            <h5 class="day-5" id="date5">Date: </h5>
+                            <p></p>
+                            <span><img class="day-5" id="img5" src="" alt=""></span>
+                            <p></p>
+                            <h6 class="day5" id="temp5"> Temp:</h6>
+                            <p></p>
+                            <h6 class="day5" id="humid5"> Humidity:</h6>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                        
     <!--Start of the Script tag-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
   </body>

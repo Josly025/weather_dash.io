@@ -4,45 +4,55 @@
 $(document).ready(function () {
   var queryUrl;
   var queryUV;
+  var queryFive;
   var lat;
   var long;
   var city;
-  var searchHistory = [];
+
+  let searchHistory = [];
 
   //keyup on search input tag for city
   var cityInput = $("#city-input").keyup(function () {
     var value = $(this).val();
     city = value;
-
     queryUrl = `http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
   });
-  console.log(searchHistory, "history outside");
-  //Getting item from local storage + button to insert value into city-input
+  ////// Clear Button
+  $("#clear-hist").on("click", function () {
+    localStorage.removeItem("city-input");
+    // location.reload();
+  });
+  $("#search-button").click(function (e) {
+    e.preventDefault();
 
-  $("#search-button").click(function () {
     //Local storage of Cities' searched
-    var getCity = localStorage.getItem("city-input");
-    searchHistory.push(city);
+    console.log(searchHistory);
+    let cities = city;
+    searchHistory.push(cities);
     localStorage.setItem("city-input", searchHistory);
-    console.log(getCity, "get city from input");
-    console.log(searchHistory, "last searched"); //this is our array
-    var newP = $("#city-search").append("<p>");
-    newP.text(getCity);
 
-    //loop through storage
-    for (i = 0; i < searchHistory.length; i++) {
-      var cityBtn = $("<button>");
-      console.log(cityBtn);
-      cityBtn.text(searchHistory[i++]);
-      $("#list-example").html(cityBtn);
+    ///getting searchHistory from local storage
+
+    let lastSearched = localStorage.getItem("city-input");
+    console.log(lastSearched);
+
+    for (var i = 0; i < searchHistory.length; i++) {
+      const searchItem = $("#searchHistory");
+      searchItem.append(`<li
+                id="city-hist1"
+            class="list-group-item "
+              ><a href="#">
+                ${searchHistory[i]}
+            </a></li>`);
     }
 
+    ////AJAX for 1st weather call ////////
     $.ajax({
       url: queryUrl,
       method: "GET",
     }).then(function (response) {
-      console.log(response); //this is our city object with data
-      console.log(response.weather);
+      // console.log(response); //this is our city object with data
+      // console.log(response.weather);
       // Weather ICON
       var weatherIcon = response.weather
         .map(function (index) {
@@ -61,7 +71,7 @@ $(document).ready(function () {
       $("#current-date").text(currentDate);
       //TEMP in F
       var tempF =
-        "Temperature(F): " +
+        "Temperature(˚F): " +
         ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2);
       $("#temperature").text(tempF);
       // HUMIDIITY
@@ -90,7 +100,7 @@ $(document).ready(function () {
       }).then(function (responseTwo) {
         //UV index
         var uvIndex = "UV Index: " + responseTwo.value;
-        console.log(responseTwo);
+        // console.log(responseTwo);
         $("#UV-index").text(uvIndex);
 
         var indexDiv = $("#index-div");
@@ -107,6 +117,68 @@ $(document).ready(function () {
       $("#clearHistory").click(function () {
         window.localStorage.clear();
       });
+    });
+
+    // Ajax call for 5 day Weather Forecast
+    queryFive = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
+    $.ajax({
+      url: queryFive,
+      method: "GET",
+    }).then(function (res) {
+      // console.log(res); //5 day forecast object for indexing
+      // Day 1
+      $("#date1").append(`Date: ${res.list[0].dt_txt}`);
+      $("#img1").attr(
+        "src",
+        `http://openweathermap.org/img/w/${res.list[0].weather[0].icon}.png`
+      );
+      $("#temp1").append(
+        `${((res.list[0].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
+      );
+      $("#humid1").append(`${res.list[0].main.humidity}%`);
+      ////
+      // Day 2
+      $("#date2").append(`Date: ${res.list[7].dt_txt}`);
+      $("#img2").attr(
+        "src",
+        `http://openweathermap.org/img/w/${res.list[7].weather[0].icon}.png`
+      );
+      $("#temp2").append(
+        `${((res.list[7].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
+      );
+      $("#humid2").append(`${res.list[7].main.humidity}%`);
+      // Day 3
+      $("#date3").append(`Date: ${res.list[15].dt_txt}`);
+      $("#img3").attr(
+        "src",
+        `http://openweathermap.org/img/w/${res.list[15].weather[0].icon}.png`
+      );
+      $("#temp3").append(
+        `${((res.list[15].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
+      );
+      $("#humid3").append(`${res.list[15].main.humidity}%`);
+      ////
+      // Day 4
+      $("#date4").append(`Date: ${res.list[23].dt_txt}`);
+      $("#img4").attr(
+        "src",
+        `http://openweathermap.org/img/w/${res.list[23].weather[0].icon}.png`
+      );
+      $("#temp4").append(
+        `${((res.list[23].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
+      );
+      $("#humid4").append(`${res.list[23].main.humidity}%`);
+      ////
+      // Day 5
+      $("#date5").append(`Date: ${res.list[31].dt_txt}`);
+      $("#img5").attr(
+        "src",
+        `http://openweathermap.org/img/w/${res.list[31].weather[0].icon}.png`
+      );
+      $("#temp5").append(
+        `${((res.list[31].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
+      );
+      $("#humid5").append(`${res.list[31].main.humidity}%`);
     });
   });
 });

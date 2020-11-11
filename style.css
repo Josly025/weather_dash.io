@@ -1,3 +1,7 @@
+* {
+  font-family: "Saira", sans-serif;
+}
+
 form {
   margin-bottom: 20px;
 }
@@ -5,7 +9,6 @@ input {
   margin: 15px;
 }
 header {
-  background-color: rgb(21, 101, 177);
   text-align: center;
   height: 75px;
   width: flex;
@@ -13,30 +16,10 @@ header {
   box-sizing: content-box;
 }
 
-#clearHistory {
-  margin: 10px;
-  font-weight: 500;
-  color: white;
-  border-radius: 2px;
-  background: rgb(21, 101, 177);
-}
-#header {
-  text-align: center;
-  padding: 18px;
-  font-size: 25px;
-  font-weight: bold;
-}
-#city-name {
-  font-weight: bold;
+#clear-hist {
+  margin-left: 25px;
 }
 
-.search-header {
-  color: white;
-  font-size: 25px;
-  border-radius: 20px;
-}
-
-#index-div {
-  font-weight: bolder;
-  border-radius: 2px;
+.card {
+  padding: 5px;
 }
