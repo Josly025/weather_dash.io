@@ -15,7 +15,7 @@ $(document).ready(function () {
   var cityInput = $("#city-input").keyup(function () {
     var value = $(this).val();
     city = value;
-    queryUrl = `http://api.openweathermap.org/data/2.5/weather?q=${value}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
+    queryUrl = `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
   });
   ////// Clear Button
   $("#clear-hist").on("click", function () {
@@ -60,7 +60,7 @@ $(document).ready(function () {
         })
         .toString();
 
-      var iconUrl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+      var iconUrl = "https://openweathermap.org/img/w/" + weatherIcon + ".png";
       $("#iconUrl").attr("src", iconUrl);
 
       // CITY NAME
@@ -87,7 +87,7 @@ $(document).ready(function () {
       long = response.coord.lon;
 
       queryUV =
-        "http://api.openweathermap.org/data/2.5/uvi?lat=" +
+        "https://api.openweathermap.org/data/2.5/uvi?lat=" +
         lat +
         "&" +
         "lon=" +
@@ -120,7 +120,7 @@ $(document).ready(function () {
     });
 
     // Ajax call for 5 day Weather Forecast
-    queryFive = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
+    queryFive = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=61db461bd021f2b15d8d849b1dfb3b9a`;
     $.ajax({
       url: queryFive,
       method: "GET",
@@ -130,7 +130,7 @@ $(document).ready(function () {
       $("#date1").append(`Date: ${res.list[0].dt_txt}`);
       $("#img1").attr(
         "src",
-        `http://openweathermap.org/img/w/${res.list[0].weather[0].icon}.png`
+        `https://openweathermap.org/img/w/${res.list[0].weather[0].icon}.png`
       );
       $("#temp1").append(
         `${((res.list[0].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
@@ -141,7 +141,7 @@ $(document).ready(function () {
       $("#date2").append(`Date: ${res.list[7].dt_txt}`);
       $("#img2").attr(
         "src",
-        `http://openweathermap.org/img/w/${res.list[7].weather[0].icon}.png`
+        `https://openweathermap.org/img/w/${res.list[7].weather[0].icon}.png`
       );
       $("#temp2").append(
         `${((res.list[7].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
@@ -151,7 +151,7 @@ $(document).ready(function () {
       $("#date3").append(`Date: ${res.list[15].dt_txt}`);
       $("#img3").attr(
         "src",
-        `http://openweathermap.org/img/w/${res.list[15].weather[0].icon}.png`
+        `https://openweathermap.org/img/w/${res.list[15].weather[0].icon}.png`
       );
       $("#temp3").append(
         `${((res.list[15].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
@@ -162,7 +162,7 @@ $(document).ready(function () {
       $("#date4").append(`Date: ${res.list[23].dt_txt}`);
       $("#img4").attr(
         "src",
-        `http://openweathermap.org/img/w/${res.list[23].weather[0].icon}.png`
+        `https://openweathermap.org/img/w/${res.list[23].weather[0].icon}.png`
       );
       $("#temp4").append(
         `${((res.list[23].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
@@ -173,7 +173,7 @@ $(document).ready(function () {
       $("#date5").append(`Date: ${res.list[31].dt_txt}`);
       $("#img5").attr(
         "src",
-        `http://openweathermap.org/img/w/${res.list[31].weather[0].icon}.png`
+        `https://openweathermap.org/img/w/${res.list[31].weather[0].icon}.png`
       );
       $("#temp5").append(
         `${((res.list[31].main.temp - 273.15) * 1.8 + 32).toFixed(2)}`
